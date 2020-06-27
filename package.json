@@ -4,6 +4,11 @@
   "description": "Core game engine of Caro",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build-server": "babel -d ./dist ./src -s",
+    "build": "npm run clean && npm run build-server",
+    "lint": "eslint .",
+    "start": "nodemon --exec babel-node --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/pqhuy98/caro-core/issues"
   },
-  "homepage": "https://github.com/pqhuy98/caro-core#readme"
+  "homepage": "https://github.com/pqhuy98/caro-core#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/node": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-strongloop": "^2.1.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "babel-plugin-root-import": "^6.5.0",
+    "lodash": "^4.17.15"
+  }
 }
