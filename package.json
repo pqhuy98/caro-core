@@ -1,0 +1,19 @@
+{
+  "name": "caro-core",
+  "version": "1.0.0",
+  "description": "Core game engine of Caro",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pqhuy98/caro-core.git"
+  },
+  "author": "Huy Pham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pqhuy98/caro-core/issues"
+  },
+  "homepage": "https://github.com/pqhuy98/caro-core#readme"
+}
