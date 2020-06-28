@@ -13,47 +13,49 @@ export default class CaroGame {
 
 
     play(color, x, y) {
-        if (this.gameOver === true) {
+        let res = _.cloneDeep(this);
+        if (res.gameOver === true) {
             // game already ended
-            return false;
+            return null;
         }
-        if (this.moves.length > 0 && color === this.moves[this.moves.length - 1].split(":")[0]) {
+        if (res.moves.length > 0 && color === res.moves[res.moves.length - 1].split(":")[0]) {
             // same player
-            return false;
+            return null;
         }
         if (!Number.isInteger(x) || !Number.isInteger(y)) {
             // invalid coordinate
-            return false;
+            return null;
         }
-        if (!this.colors.includes(color)) {
+        if (!res.colors.includes(color)) {
             // wrong color
-            return false;
+            return null;
         }
-        for (let i = 0; i < this.moves.length; i++) {
-            let mx = parseInt(this.moves[i].split(":")[1], 10);
-            let my = parseInt(this.moves[i].split(":")[2], 10);
+        for (let i = 0; i < res.moves.length; i++) {
+            let mx = parseInt(res.moves[i].split(":")[1], 10);
+            let my = parseInt(res.moves[i].split(":")[2], 10);
             if (x === mx && y === my) {
                 // occupied coordinate
-                return false;
+                return null;
             }
         }
 
         let m = move(color, x, y);
-        this.moves.push(m);
-        let over = this.checkGameOver();
+        res.moves.push(m);
+        let over = res.findFive();
         if (over !== false) {
-            this.gameOver = true;
-            return over;
+            res.gameOver = true;
         }
-        return true;
+        return res;
     }
 
     undo() {
-        this.gameOver = false;
-        this.moves.pop();
+        let res = _.cloneDeep(this);
+        res.gameOver = false;
+        res.moves.pop();
+        return res;
     }
 
-    checkGameOver() {
+    findFive() {
         let set = {};
         this.moves.forEach((m) => {
             set[m] = true;
