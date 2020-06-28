@@ -1,3 +1,4 @@
+import _ from "lodash";
 
 function move(color, x, y) {
     return color + ":" + x + ":" + y;
@@ -39,10 +40,17 @@ export default class CaroGame {
 
         let m = move(color, x, y);
         this.moves.push(m);
-        if (this.checkGameOver() === true) {
+        let over = this.checkGameOver();
+        if (over !== false) {
             this.gameOver = true;
+            return over;
         }
         return true;
+    }
+
+    undo() {
+        this.gameOver = false;
+        this.moves.pop();
     }
 
     checkGameOver() {
@@ -66,7 +74,10 @@ export default class CaroGame {
                     }
                 }
                 if (cnt >= 5) {
-                    return true;
+                    return _.range(0, 5).map((i) => {
+                        let m2 = move(color, x + i * dx[d], y + i * dy[d]);
+                        return m2;
+                    });
                 }
             }
         }
@@ -74,22 +85,4 @@ export default class CaroGame {
         return false;
     }
 }
-
-let g = new CaroGame();
-
-console.log(g.play("X", 0, 0));
-console.log(g.play("O", 0, 1));
-
-console.log(g.play("X", 1, 1));
-console.log(g.play("O", 0, 2));
-
-console.log(g.play("X", 2, 2));
-console.log(g.play("O", 0, 3));
-
-console.log(g.play("X", 3, 3));
-console.log(g.play("O", 0, 4));
-
-console.log(g.play("X", 4, 4));
-console.log(g.play("O", 0, 5));
-
 
