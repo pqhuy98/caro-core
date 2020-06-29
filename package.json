@@ -33,6 +33,7 @@
   "dependencies": {
     "@babel/cli": "^7.10.3",
     "babel-plugin-root-import": "^6.5.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "uuid": "^8.2.0"
   }
 }
